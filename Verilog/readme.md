@@ -1,5 +1,5 @@
 # DUT Verification Environment
-
+![Alt text](./Convo Environment (1).png)
 ![Verification Environment Architecture](Convo Environment (1).png)
 
 This README provides an overview of the verification environment for the Design Under Test (DUT) and instructions on how to use it.
