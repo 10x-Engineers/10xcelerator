@@ -1,0 +1,7 @@
+In this Environment we are Verifing 1 Instatnce of Conv Module and Flow is simple 
+Sequence ->Driver -> DUT ->Monitor -> Scoreboard 
+There is a referance model of convolution to verify the answers of Conv.
+Driver is sending input to DUT and also to Scoreboard by using TLM ports.
+Monitor is recieving Output of DUT and then tranfering it to Scoreboard by using TLM ports.
+In Scoreboard there are 2 fifos which will recieve Inputs from Driver and DUT Output from Monitor 
+and then give same input to Refrance model and recieve output from Refrance model and compair that with DUT output.
