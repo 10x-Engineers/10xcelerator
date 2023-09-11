@@ -2,6 +2,7 @@
 /verif/Conv_Module_env/simv
 /verif/Conv_Module_env/dump.vcd
 /verif/Conv_Module_env/ucli.key
+/verif/Conv_Module_env/output.txt
 
 
 
@@ -9,16 +10,16 @@
 /verif/Conv_layer1_env/simv
 /verif/Conv_layer1_env/dump.vcd
 /verif/Conv_layer1_env/ucli.key
-
+/verif/Conv_layer1_env/output.txt
 
 /verif/Sampling_layer1_env/simv.cst
 /verif/Sampling_layer1_env/simv
 /verif/Sampling_layer1_env/dump.vcd
 /verif/Sampling_layer1_env/ucli.key
-
+/verif/Sampling_layer1_env/output.txt
 
 /verif/Sampling_Module_env/simv.cst
 /verif/Sampling_Module_env/simv
 /verif/Sampling_Module_env/dump.vcd
 /verif/Sampling_Module_env/ucli.key
-
+/verif/Sampling_Module_env/output.txt
