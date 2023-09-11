@@ -8,15 +8,16 @@ This Verification Environment is to Verify the Conv Layer1 which has 6 instances
 
 ## Architecture
 
-In this part, there are 6 copies of the conv module in Layer1 and there is Relu Operation on output too. 
-The main requirement here is to use the same Environment of the Conv Module and then make 6 instances of Smaller Environments to Make a wrapper environment that will fulfill our requirement of Reusing. 
-I Will be using 6 instances of this below environment:
+Within this specific section of our verification process, the Environment deals with a set of six Convolution Modules, all residing in Layer 1 of our design. Additionally, a Rectified Linear Unit (ReLU) operation is applied to their respective outputs. The primary objective here is to maximize efficiency and maintain consistency by utilizing the same Environment for all Convolution Modules. To achieve this, we've created six instances of smaller Environments, effectively crafting a wrapper environment that fulfills our reuse requirement.
+In this comprehensive setup, we employ six instances of the following Environment:
+
 
 ![Verification Environment Architecture](Conv_env_only.png)
 
-My interface has Input and output in both parts and in this layer, input is the same for all conv modules but the output is different so only one driver will be running along with all monitors and scoreboards. Also, there are 2 levels of output one is the output of conv and the other is after Relu.
-So I have designed a separate temporary interface that will get the values of Relu and the other 6 interfaces will be getting conv outputs by accessing direct DUT internal signals.
-Conv output is already verified by the scoreboard of smaller environments but for the Relu part I have designed another scoreboard and a passive agent whose monitor will receive Relu output and then through the TLM port it will sent to the main scoreboard for comparison, For this new sequence item is created that can hold with and without Relu outputs. 
+Each instance of this Environment encompasses an interface that features both input and output ports. Notably, while the input remains consistent across all Convolution Modules within this layer, the output differs for each. Consequently, we've streamlined our approach by utilizing a single Driver in conjunction with multiple Monitors and Scoreboards. It's worth noting that within this layer, we have two levels of output: the primary Convolution output and the post-ReLU output.
+To accommodate this structure seamlessly, we've devised a dedicated temporary interface designed to capture ReLU values. Simultaneously, the remaining six interfaces access the Convolution outputs directly through the DUT's internal signals.
+It's important to emphasize that Convolution output validation has already been successfully handled by the Scoreboard within the smaller environments. However, for the ReLU component, we've introduced an additional Scoreboard and 6 Passive Agents. The Passive Agent's Monitor receives the ReLU output, and through TLM (Transaction-Level Modeling) communication, forwards it to the Relu-Scoreboard for rigorous comparison. To facilitate this, we've introduced a new sequence item capable of storing both pre-and post-ReLU outputs, ensuring comprehensive verification.
+
 
 ![Verification Environment Architecture](Conv_layer1.png)
 

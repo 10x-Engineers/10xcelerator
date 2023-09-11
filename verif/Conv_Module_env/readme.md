@@ -10,19 +10,24 @@ This Verification Environment is to Verify the Single Module of Conv.
 
 ![Verification Environment Architecture](Conv.png)
 
-Flow of Stimulus is simple as below : 
+This Environment is validating a single instance of the Convolution Module. The verification flow follows a straightforward sequence, encompassing key components: Sequence, Driver, Design Under Test (DUT), Monitor, and Scoreboard.
 
-Sequence ->Driver -> DUT ->Monitor -> Scoreboard
+The verification process is orchestrated as follows:
+1. Sequence: High-level sequences define the input stimulus patterns that need to be applied to the DUT for testing.
+2. Driver: The Driver component is responsible for transmitting input sequences to the DUT. 
+By writing sequence values on the interface.
+3. Design Under Test (DUT): This is the core module under verification, where the convolution operation is executed based on the provided input sequences.
+4. Monitor: The Monitor observes the output produced by the DUT. It receives this output and facilitates its transfer to the Scoreboard through TLM ports.
+5. Scoreboard: The Scoreboard serves as the central verification engine. It features two FIFOs?one receiving inputs from the Driver and the other collecting DUT outputs from the Monitor. The Scoreboard not only stores these inputs but also provides them to a Reference Model. This Reference Model calculates the expected output for comparison.
 
-There is a reference model of convolution to verify the answers of Conv.
+The verification process unfolds in the Scoreboard, where:
+- Inputs received from the Driver and DUT's output from the Monitor are stored in separate FIFOs.
+- These stored inputs are simultaneously presented to the Reference Model.
+- The Reference Model computes the expected output based on the provided inputs.
+- The DUT's output from the Monitor is then compared against the computed expected output from the Reference Model.
 
-Driver is sending input to DUT and Scoreboard using TLM ports.
+This systematic verification approach ensures that the DUT operates as intended, with its output aligned with the reference model's expected behavior, validating the correctness of the Convolution Module.
 
-The monitor receives the Output of DUT and then transfers it to the Scoreboard by using TLM ports.
-
-In the Scoreboard there are 2 fifos which will receive Inputs from Driver and DUT Output from Monitor
-
-and then give the same input to the Reference model and receive output from the reference model and compare that with the DUT output.
 
 ## Prerequisites
 

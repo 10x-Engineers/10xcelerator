@@ -46,7 +46,6 @@ class wrapper_env extends uvm_env;
    // build_phase
    //---------------------------------------
    function void build_phase(uvm_phase phase);
-      //cfg = acc_config::type_id::create("cfg", this);
       env1 = acc_env::type_id::create("env1", this);
       env2 = acc_env::type_id::create("env2", this);
       env3 = acc_env::type_id::create("env3", this);
