@@ -19,7 +19,7 @@ Each instance within this ensemble possesses a distinct interface, featuring uni
 The modular design of the verification environment eliminates the necessity for an additional scoreboard, as each smaller environment autonomously manages the monitoring and validation of its respective instance. This streamlined approach optimizes the testing infrastructure, rendering it both scalable and resource-efficient.
 
 
-![Verification Environment Architecture](Sampling_Layer1.png)
+![Verification Environment Architecture](Sampling_Layer_1.png)
 
 ## Prerequisites
 

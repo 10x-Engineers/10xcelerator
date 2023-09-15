@@ -19,7 +19,7 @@ To accommodate this structure seamlessly, we've devised a dedicated temporary in
 It's important to emphasize that Convolution output validation has already been successfully handled by the Scoreboard within the smaller environments. However, for the ReLU component, we've introduced an additional Scoreboard and 6 Passive Agents. The Passive Agent's Monitor receives the ReLU output, and through TLM (Transaction-Level Modeling) communication, forwards it to the Relu-Scoreboard for rigorous comparison. To facilitate this, we've introduced a new sequence item capable of storing both pre-and post-ReLU outputs, ensuring comprehensive verification.
 
 
-![Verification Environment Architecture](Conv_layer1.png)
+![Verification Environment Architecture](Conv_layer_1.png)
 
 ## Prerequisites
 
