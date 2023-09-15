@@ -12,7 +12,6 @@ int i =1;
         acc_seq_item tr;
 
       repeat(784) begin//connect with sequencer and DUT 
-          tr = acc_seq_item::type_id::create("tr");
         `uvm_do(tr);//_with (tr,{tr.input_port==i;}) 
         i++;
 

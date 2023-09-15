@@ -12,8 +12,7 @@ class acc_seq extends uvm_sequence #(acc_seq_item);
         acc_seq_item tr;
 
         repeat (784) begin // Connect with sequencer and DUT
-            tr = acc_seq_item::type_id::create("tr");
-            `uvm_do(tr); // Set input_port to 'i'
+            `uvm_do(tr); 
             tr.input_port = i;
             i++;
         end

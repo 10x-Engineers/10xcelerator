@@ -11,7 +11,6 @@ int i =1;
         samp_seq_item tr;
 
       repeat(576) begin//connect with sequencer and DUT 
-          tr = samp_seq_item::type_id::create("tr");
         `uvm_do(tr); //_with (tr,{tr.Input_Pixel==i;}) 
        // i++;
         end

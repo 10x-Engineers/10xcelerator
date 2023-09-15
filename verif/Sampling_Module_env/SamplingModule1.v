@@ -71,23 +71,37 @@ module SamplingModule1(
 	begin
 		if (Input_Valid == 1 && Input_Reset == 0/* && Output_Finish == 0*/)
 		begin
-			if (Input_Counter == 575)
-			begin
-				Flag_Input_Buffer_Filled <= 'b1;
-				/*
-				for (i=0;i<576;i=i+1)
-				begin
-					Latch_Buffer[i] <= Input_Buffer[i];
-				end
-				*/
-			end
-			else if (Input_Counter < 575)
+	
+//previous code 
+	// if (Input_Counter == 575)
+	// 		begin
+	// 			Flag_Input_Buffer_Filled <= 'b1;
+	// 			/*
+	// 			for (i=0;i<576;i=i+1)
+	// 			begin
+	// 				Latch_Buffer[i] <= Input_Buffer[i];
+	// 			end
+	// 			*/
+	// 		end
+	// 		else if (Input_Counter < 575)
+	// 		begin
+	// 			Input_Buffer[Input_Counter] <= Input_Pixel;
+	// 			Input_Counter <= Input_Counter + 1;
+	// 		end
+
+//** new code 
+			 if (Input_Counter <  576)
 			begin
 				Input_Buffer[Input_Counter] <= Input_Pixel;
 				Input_Counter <= Input_Counter + 1;
+				if(Input_Counter == 575)
+				begin 
+                  Flag_Input_Buffer_Filled <= 'b1;
+				end 
 			end
 		end
 
+//***
 		if (Input_Reset == 1)
 		begin
 		//output registers
@@ -220,7 +234,8 @@ module SamplingModule1(
 				//line# 7
 				'd072: Output_Pixel <= (Latch_Buffer[288+00] + Latch_Buffer[288+01] + Latch_Buffer[288+24] + Latch_Buffer[288+25]) /4;
 				'd073: Output_Pixel <= (Latch_Buffer[288+02] + Latch_Buffer[288+03] + Latch_Buffer[288+26] + Latch_Buffer[288+27]) /4;
-				'd004: Output_Pixel <= (Latch_Buffer[288+04] + Latch_Buffer[288+05] + Latch_Buffer[288+28] + Latch_Buffer[288+29]) /4;
+				//previous code 'd004: Output_Pixel <= (Latch_Buffer[288+04] + Latch_Buffer[288+05] + Latch_Buffer[288+28] + Latch_Buffer[288+29]) /4;
+				'd074: Output_Pixel <= (Latch_Buffer[288+04] + Latch_Buffer[288+05] + Latch_Buffer[288+28] + Latch_Buffer[288+29]) /4;
 				'd075: Output_Pixel <= (Latch_Buffer[288+06] + Latch_Buffer[288+07] + Latch_Buffer[288+30] + Latch_Buffer[288+31]) /4;
 				'd076: Output_Pixel <= (Latch_Buffer[288+08] + Latch_Buffer[288+09] + Latch_Buffer[288+32] + Latch_Buffer[288+33]) /4;
 				'd077: Output_Pixel <= (Latch_Buffer[288+10] + Latch_Buffer[288+11] + Latch_Buffer[288+34] + Latch_Buffer[288+35]) /4;
@@ -305,3 +320,4 @@ module SamplingModule1(
 	
 		
 endmodule
+
