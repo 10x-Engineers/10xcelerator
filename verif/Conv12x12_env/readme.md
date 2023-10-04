@@ -4,7 +4,7 @@ This README provides an overview of the verification environment for the Design 
 
 ## Overview
 
-This Verification Environment is to Verify the Single Module of Conv. 
+This Verification Environment is to Verify the Single Module of Conv12x12. 
 
 ## Architecture
 
