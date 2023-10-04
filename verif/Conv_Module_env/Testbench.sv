@@ -1,7 +1,10 @@
 //This module will initiate the DUT and set that interface for other components 
  //Include all files
+
+
  `include "Interface.sv"
   import include_pkg::*;
+
 
 `define DIF this.vif.driver.driver_cb
 module testbench;
@@ -25,8 +28,21 @@ module testbench;
       #10 h_clk = ~h_clk;
    end
 
-  acc_if  acc_if(.h_clk(h_clk));
+  acc_if acc_if(.h_clk(h_clk));
   
+
+
+	// conv_12x12 uut (
+	// 	.input_port(acc_if.input_port), 
+	// 	.valid(acc_if.valid), 
+	// 	.clk(acc_if.h_clk), 
+	// 	.reset(acc_if.reset), 
+	// 	.output_port(acc_if.output_port),
+	// 	.invalid(acc_if.invalid),
+	// 	.bias(acc_if.bias),
+	// 	.finish(acc_if.finish)	
+
+	// );
 
 
   conv uut (
@@ -53,7 +69,6 @@ module testbench;
   
   
 endmodule
-
 
 
 

@@ -1,12 +1,12 @@
+
 `define DIF this.vif.driver.driver_cb
-typedef acc_agent;
-typedef acc_scoreboard;
 
 class acc_driver extends uvm_driver#(acc_seq_item);
 
    virtual acc_if vif;
    integer count = 0;
-   `uvm_component_utils(acc_driver)
+    //`uvm_component_param_utils(acc_driver #(input_size,bias_size,kernel_size,input_matrix_size, output_size))
+   `uvm_component_utils(acc_driver  )
    uvm_analysis_port#(acc_seq_item) ap;
 
    function new(string name, uvm_component parent = null);
@@ -32,7 +32,7 @@ class acc_driver extends uvm_driver#(acc_seq_item);
       @(`DIF);
 
       forever begin
-         acc_seq_item tr;
+         acc_seq_item  tr;
          
          // Get the next sequence item
          seq_item_port.get_next_item(tr);
@@ -43,6 +43,7 @@ class acc_driver extends uvm_driver#(acc_seq_item);
 
          // Mark the sequence item as done
          seq_item_port.item_done();
+
          count = count + 1;
          @(`DIF);
       end

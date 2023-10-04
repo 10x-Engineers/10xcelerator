@@ -1,9 +1,12 @@
+ `include "parameters.svh"
+
+
 class temp_seq_item extends uvm_sequence_item;
     // Output data width
-    bit [32-1:0] prev_output;
+    bit [`OUTPUT_SIZE] prev_output;
 
     // Output data width for Relu
-    bit [32-1:0] after_output;
+    bit [`OUTPUT_SIZE] after_output;
 
     `uvm_object_utils_begin(temp_seq_item)
         `uvm_field_int(prev_output, UVM_DEFAULT)

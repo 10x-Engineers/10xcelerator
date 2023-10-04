@@ -1,4 +1,10 @@
 /verif/Conv_Module_env/simv.cst
+/verif/Conv_Module_env/simv.daidir
+/verif/Conv_Module_env/csrc
+/verif/Conv_Module_env/cm.log
+/verif/Conv_Module_env/sim.log
+/verif/Conv_Module_env/tr_db.log
+/verif/Conv_Module_env/vc_hdrs.h
 /verif/Conv_Module_env/simv
 /verif/Conv_Module_env/dump.vcd
 /verif/Conv_Module_env/ucli.key
@@ -18,3 +24,14 @@
 /verif/Sampling_Module_env/dump.vcd
 /verif/Sampling_Module_env/ucli.key
 /verif/Sampling_Module_env/output.txt
+/verif/Conv12x12_env/simv.cst
+/verif/Conv12x12_env/simv
+/verif/Conv12x12_env/dump.vcd
+/verif/Conv12x12_env/ucli.key
+/verif/Conv12x12_env/output.txt
+/verif/Conv12x12_env/csrc
+/verif/Conv12x12_env/sim.daidir
+/verif/Conv12x12_env/cm.log
+/verif/Conv12x12_env/sim.log
+/verif/Conv12x12_env/tr_db.log
+/verif/Conv12x12_env/vc_hdrs.h

@@ -1,3 +1,6 @@
+`include "parameters.svh"
+
+
 ////////////////////////////////////////////////////////// Using TLM FIFO ///////////////////////////////////////////////////
 class acc_scoreboard extends uvm_scoreboard;
     `uvm_component_utils(acc_scoreboard)
@@ -11,12 +14,26 @@ class acc_scoreboard extends uvm_scoreboard;
     acc_seq_item transaction_before;
     acc_seq_item transaction_after;
 
-    logic [31:0] kernel[25];
-    logic [31:0] temp_output = 0;
-    logic [15:0] temp_input[784];
-    logic [32] bias = 0;
-    int number = 0;
-    logic [15:0] input_temp[25]; // For sending to the function
+    parameter int input_size = `INPUT_SIZE;
+    parameter int input_matrix_size = `INPUT_MATRIX_SIZE;
+    parameter int output_size = `OUTPUT_SIZE;
+    parameter int bias_size = `BIAS_SIZE;
+    parameter int kernel_size = `KERNEL_SIZE;
+
+
+   logic [output_size] kernel[kernel_size*kernel_size];
+   logic [output_size] temp_output = 0;
+   logic [input_size] temp_input[input_matrix_size*input_matrix_size];
+   logic [bias_size] bias = 0;
+   int number = 0;
+   logic [input_size] input_temp[kernel_size*kernel_size];   // for sending to the function
+
+
+    logic [output_size] kernel[kernel_size*kernel_size];
+    logic [output_size] temp_output = 0;
+   logic [input_size] temp_input[input_matrix_size*input_matrix_size];
+   logic [bias_size] bias = 0;
+   logic [input_size] input_temp[kernel_size*kernel_size];   // for sending to the function
 
     // Variables for iterations
     integer i1 = 0;
@@ -25,7 +42,7 @@ class acc_scoreboard extends uvm_scoreboard;
     integer t = 0; // For invalid values jump
     integer out_count = 0;
     string error_message;
-
+      int stoper = (input_matrix_size-kernel_size)+1; // to stop when outputs are complete 
     function new(string name, uvm_component parent);
         super.new(name, parent);
         transaction_before = new("transaction_before");
@@ -47,15 +64,15 @@ class acc_scoreboard extends uvm_scoreboard;
         export_after.connect(after_fifo.analysis_export);
     endfunction: connect_phase
 
-    function automatic logic[32] mul_sum(logic [16] array[25], logic[32] kernel[25], logic signed [32] baise);
-        logic signed [32] out = 0;
-        for (int i = 0; i < 25; i++) begin
-            out = out + (array[i] * kernel[i]);
-        end
-        out = out + baise;
+   function automatic logic[output_size] mul_sum(logic [input_size] array[kernel_size*kernel_size], logic[output_size] kernel[kernel_size*kernel_size], logic [bias_size] baise);
+      logic [output_size] out = 0;
+      for (int i = 0; i < (kernel_size*kernel_size); i++) begin
+         out = out + (array[i] * kernel[i]);
+      end
+      out = out + baise;
 
-        return out;
-    endfunction
+      return out;
+   endfunction
 
     virtual task run_phase(uvm_phase phase);
         super.run_phase(phase);
@@ -63,26 +80,36 @@ class acc_scoreboard extends uvm_scoreboard;
     endtask
 
     virtual task run();
-        forever begin // Input populating in the internal array
-            before_fifo.get(transaction_before);
-            temp_input[i1] = transaction_before.input_port;
-            i1++;
-            if (i1 == 784) begin
-                $display("input population done");
-                break;
-            end
-        end
+       forever begin  // input populating in internal array
+         before_fifo.get(transaction_before);
+         temp_input[i1] = transaction_before.input_port;
+       
+         i1++;
+         if (i1 == (input_matrix_size*input_matrix_size)) begin
+            break;
+         end
+      end
 
-        for (int i = 0; out_count != 576; i++) begin
-            j2 = i;
-            for (int j = i; i2 < 25; j++) begin
-                input_temp[i2] = temp_input[j];
-                if (j - j2 == 4) begin
-                    j = j + 23;
-                    j2 = j2 + 28;
-                end
-                i2++;
+
+  
+      for (int i = 0; out_count != (stoper*stoper); i++) begin
+         j2 = i;
+         for (int j = i; i2 < (kernel_size*kernel_size); j++) begin
+            input_temp[i2] = temp_input[j];
+
+           
+            if (j - j2 == (kernel_size-1)) begin
+              
+               //j = j + (input_matrix_size-kernel_size);
+               j2 = j2 + input_matrix_size;
+               j=j2;
+               j--;
+              
             end
+            i2++;
+         end
+
+
 
             // ****
             after_fifo.get(transaction_after);
@@ -96,10 +123,12 @@ class acc_scoreboard extends uvm_scoreboard;
             end
             // ****
             i2 = 0;
-            if (i - t == 23) begin
-                i = i + 4;
-                t = i + 1;
-            end
+            if (i - t == (input_matrix_size-kernel_size)) begin
+             // $display("i : %d , t : %d ", i,t );
+            i = i + (kernel_size- 1);
+            t = i + 1;
+              // $display("i : %d , t : %d ", i,t );
+         end
             out_count++;
         end
     endtask
