@@ -1,0 +1,9 @@
+
+`define INPUT_SIZE 16
+`define BIAS_SIZE 32
+`define KERNEL_SIZE 5
+`define INPUT_MATRIX_SIZE 28
+`define OUTPUT_SIZE 32
+
+
+

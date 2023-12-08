@@ -1,0 +1,9 @@
+#!/bin/sh -h 
+PYTHONHOME=/usr/synopsys/vcs-L-2016.06//etc/search/pyh
+export PYTHONHOME
+PYTHONPATH=/usr/synopsys/vcs-L-2016.06/linux64/lib/pylib27
+export PYTHONPATH
+LD_LIBRARY_PATH=/usr/synopsys/vcs-L-2016.06/linux64/lib:/usr/synopsys/vcs-L-2016.06/linux64/lib/pylib27
+export LD_LIBRARY_PATH
+/usr/synopsys/vcs-L-2016.06/linux64/bin/vcsfind_create_index.exe  -z  "/home/mobeen/sVerilog/UVM/verif/Conv12x12_env/simv.daidir/debug_dump/fsearch/./idents_sZkmIZ.xml.gz" "/home/mobeen/sVerilog/UVM/verif/Conv12x12_env/simv.daidir/debug_dump/fsearch/./idents_tapi.xml.gz" -o "/home/mobeen/sVerilog/UVM/verif/Conv12x12_env/simv.daidir/debug_dump/fsearch/fsearch.db_tmp"
+\mv "/home/mobeen/sVerilog/UVM/verif/Conv12x12_env/simv.daidir/debug_dump/fsearch/fsearch.db_tmp" "/home/mobeen/sVerilog/UVM/verif/Conv12x12_env/simv.daidir/debug_dump/fsearch/fsearch.db"
